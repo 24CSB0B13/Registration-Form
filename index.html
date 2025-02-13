@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Signup - RecoverX</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #007BFF, #0056b3);
+        }
+        .container {
+            background: #fff;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            width: 350px;
+            text-align: center;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h2 {
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        input:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+        }
+        .btn {
+            background: linear-gradient(135deg, #007BFF, #0056b3);
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+        .btn:hover {
+            background: linear-gradient(135deg, #0056b3, #003d82);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+        .toggle-text {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        .toggle-text a {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .toggle-text a:hover {
+            color: #0056b3;
+        }
+        .error-message {
+            color: red;
+            display: none;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .forgot-password {
+            display: block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #007BFF;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .forgot-password:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="auth-container">
+    <h2 id="form-title">Login to RecoverX</h2>
+    
+    <div id="login-form">
+        <input type="text" id="login-username" placeholder="Username">
+        <input type="password" id="login-password" placeholder="Password">
+        <a href="web.html"><button class="btn" onclick="login()">Login</button></a>
+        <a href="#" class="forgot-password">Forgot Password?</a>
+        <p class="error-message" id="login-error">Invalid credentials. Try again.</p>
+        <p class="toggle-text">Don't have an account? <a onclick="toggleForm()">Sign Up</a></p>
+    </div>
+
+    <div id="signup-form" style="display: none;">
+        <input type="text" id="signup-username" placeholder="Username">
+        <input type="email" id="signup-email" placeholder="Email">
+        <input type="password" id="signup-password" placeholder="Password">
+        <button class="btn" onclick="signup()">Sign Up</button>
+        <p class="error-message" id="signup-error">All fields are required.</p>
+        <p class="toggle-text">Already have an account? <a onclick="toggleForm()">Login</a></p>
+    </div>
+</div>
+
+<script>
+    function toggleForm() {
+        let loginForm = document.getElementById('login-form');
+        let signupForm = document.getElementById('signup-form');
+        let title = document.getElementById('form-title');
+
+        if (loginForm.style.display === "none") {
+            loginForm.style.display = "block";
+            signupForm.style.display = "none";
+            title.innerText = "Login to RecoverX";
+        } else {
+            loginForm.style.display = "none";
+            signupForm.style.display = "block";
+            title.innerText = "Sign Up for RecoverX";
+        }
+    }
+
+    function login() {
+        const username = document.getElementById('login-username').value;
+        const password = document.getElementById('login-password').value;
+        const validUsername = "admin";
+        const validPassword = "password123";
+
+        if (username === validUsername && password === validPassword) {
+            window.location.href = "dashboard.html";
+        } else {
+            document.getElementById('login-error').style.display = 'block';
+        }
+    }
+
+    function signup() {
+        const username = document.getElementById('signup-username').value;
+        const email = document.getElementById('signup-email').value;
+        const password = document.getElementById('signup-password').value;
+
+        if (username && email && password) {
+            alert("Signup successful! Redirecting to dashboard.");
+            window.location.href = "dashboard.html"; 
+        } else {
+            document.getElementById('signup-error').style.display = 'block';
+        }
+    }
+</script>
+
+</body>
+</html>
